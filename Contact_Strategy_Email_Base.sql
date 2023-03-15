@@ -5,6 +5,8 @@ create or replace temporary table edwprodhh.pub_mbutler.temporary_full_table as 
     with zip as (
         
         select 
+
+
             
                 debtor_idx,
                 case 
@@ -205,7 +207,7 @@ create or replace temporary table edwprodhh.pub_mbutler.temporary_raw_dataset as
 
 /* below creates the final table that you are going to pull into your model */ 
 ;
-create or replace table edwprodhh.pub_mbutler.contact_strategy_Emails_2 as (
+create or replace table edwprodhh.pub_mbutler.contact_strategy_Emails_3 as (
     with raw_data as (
         select *
         from edwprodhh.pub_mbutler.temporary_raw_dataset
@@ -317,7 +319,7 @@ where is_success = 0
             
     
     from success_partition 
-    where rn <= (select max(rn) from success_partition where is_success = 0 and pn <= 0.70) 
+    where rn <= (select max(rn) from success_partition where is_success = 0 and pn <= 0.99) 
 	
 ) 
 , stored_observations as
